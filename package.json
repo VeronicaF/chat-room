@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "start": "cross-env API_ENV=dev umi dev",
-    "start-server": "nodemon --exec 'ts-node -P src/koa/tsconfig.json src/koa/index.ts'",
+    "start-server": "nodemon src/koa/index.ts",
     "build": "cross-env API_ENV=prod umi build",
     "postinstall": "umi generate tmp",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
@@ -16,6 +16,9 @@
     ],
     "delay": 1000,
     "ext": "ts",
+    "execMap": {
+      "ts": "ts-node  -P src/koa/tsconfig.json"
+    },
     "watch": [
       "src/koa/**"
     ]
@@ -43,6 +46,7 @@
     "@types/koa__cors": "^3.1.0",
     "@types/koa__router": "^8.0.11",
     "@types/passport-local": "^1.0.34",
+    "@types/uuid": "^8.3.4",
     "ahooks": "^3.0.1",
     "antd": "^4.18.2",
     "koa": "^2.13.4",
@@ -51,6 +55,7 @@
     "koa-mongo": "^1.9.3",
     "koa-passport": "^4.1.4",
     "koa-session": "^6.2.0",
+    "moment": "^2.29.1",
     "passport-local": "^1.0.0",
     "react": "17.x",
     "react-dom": "17.x",
@@ -58,7 +63,8 @@
     "socket.io-client": "^4.4.0",
     "ts-node": "^10.4.0",
     "umi": "^3.5.20",
-    "umi-request": "^1.4.0"
+    "umi-request": "^1.4.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/koa": "^2.13.4",
@@ -68,6 +74,7 @@
     "@umijs/test": "^3.5.20",
     "cross-env": "^7.0.3",
     "lint-staged": "^10.0.7",
+    "nodemon": "^2.0.15",
     "prettier": "^2.2.0",
     "typescript": "^4.1.2",
     "yorkie": "^2.0.0"
