@@ -1,21 +1,16 @@
 import { io } from 'socket.io-client'
-import { useMount, useRequest } from 'ahooks';
-import request from '@/utils/request'
-import styles from './index.less';
+import {  useRequest } from 'ahooks';
+import style from './index.less';
+import { _fetchCurrentUser } from '@/service';
 
 export default function IndexPage() {
-  useMount(() => {
-    const socket = io("http://localhost:3000")
-  })
-
-  const { data } = useRequest(() => {
-    return request('/api/')
-  })
+  const { data: currentUser } = useRequest(_fetchCurrentUser)
 
   return (
     <div>
-      <h1 className={styles.title}>Page index</h1>
-      <h1>{ data?.toString() }</h1>
+      <div className={}>
+
+      </div>
     </div>
   );
 }

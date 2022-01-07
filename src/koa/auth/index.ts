@@ -1,22 +1,29 @@
 import passport from 'koa-passport';
 import { Strategy as LocalStrategy } from 'passport-local'
 
+const users = new Set<string>()
+
 const fetchUser = (() => {
   // This is an example! Use password hashing in your project and avoid storing passwords in your code
-  const user = { id: 1, username: 'test', password: 'test' }
-  return async function() {
-    return user
+  return async function (username: string) {
+    users.add(username)
+    return { username }
   }
 })()
 
 passport.serializeUser(function(user, done) {
   // @ts-ignore
-  done(null, user.id)
+  if (user.username) {
+    // @ts-ignore
+    users.add(user.username)
+  }
+  // @ts-ignore
+  done(null, user.username)
 })
 
-passport.deserializeUser(async function(id, done) {
+passport.deserializeUser<string>(async function(username, done) {
   try {
-    const user = await fetchUser()
+    const user = await fetchUser(username)
     done(null, user)
   } catch(err) {
     done(err)
@@ -28,9 +35,10 @@ const excludePath = [
 ]
 
 passport.use(new LocalStrategy(function(username, password, done) {
-  fetchUser()
+  fetchUser(username)
     .then(user => {
-      if (username === user.username && password === user.password) {
+      console.log(username, user, [...users])
+      if (user) {
         done(null, user)
       } else {
         done(null, false)

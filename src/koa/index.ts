@@ -21,9 +21,9 @@ app.use(cors({
 // log
 app.use(logger())
 // mongo
-app.use(mongo({
-  url: 'mongodb://127.0.0.1:27017/',
-}))
+// app.use(mongo({
+//   url: 'mongodb://127.0.0.1:27017/',
+// }))
 // session
 app.keys = ['fuck u all'];
 const CONFIG = {

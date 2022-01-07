@@ -6,10 +6,10 @@ export default defineConfig({
       'target': 'http://localhost:3000',
       'changeOrigin': true,
       'pathRewrite': { '^/api' : '' },
-      onProxyRes(proxyRes: any) {
-        const cookies = proxyRes.headers['set-cookie'];
-        console.dir(proxyRes.headers)
-      }
+      // onProxyRes(proxyRes: any) {
+      //   const cookies = proxyRes.headers['set-cookie'];
+      //   console.dir(proxyRes.headers)
+      // }
     },
   },
   nodeModulesTransform: {
@@ -20,4 +20,5 @@ export default defineConfig({
     { path: '/login', component: '@/pages/Login' },
   ],
   fastRefresh: {},
+  define: { 'process.env.API_ENV': process.env.API_ENV },
 });

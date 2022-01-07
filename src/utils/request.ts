@@ -5,6 +5,7 @@
 import { extend } from 'umi-request';
 import { notification } from 'antd';
 import { stringify } from 'qs';
+const env = process.env.API_ENV
 
 // 一个永远不会resolve的promise，视为放弃这次请求的结果，防止页面报错
 // eslint-disable-next-line no-empty-function
@@ -67,6 +68,7 @@ const request = extend({
   paramsSerializer: params => {
     return stringify(params, { arrayFormat: 'comma' })
   },
+  prefix: env === 'dev' ? '/api' : '',
 });
 
 // 登录验证

@@ -3,12 +3,10 @@ import passport from 'koa-passport';
 
 const router = new Router()
 
-router.get('/', async (ctx, next) => {
-  const data = await ctx.mongo
-    .db('test')
-    .collection('users')
-    .find({}, { projection: { _id: 0 } })
-    .toArray()
+router.get('/current-user', async (ctx, next) => {
+  const data = {
+    name: ctx.state.user.username,
+  }
   ctx.body = JSON.stringify(data)
   await next()
 })
@@ -20,8 +18,8 @@ router.post('/login', async (ctx, next) => {
       ctx.status = status
       return
     } else {
-      ctx.body = { success: true }
-      return ctx.login(user)
+      ctx.login(user)
+      ctx.body = { username: ctx.state.user.username }
     }
   })(ctx, next)
 })

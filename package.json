@@ -1,9 +1,9 @@
 {
   "private": true,
   "scripts": {
-    "start": "umi dev",
+    "start": "cross-env API_ENV=dev umi dev",
     "start-server": "nodemon --exec 'ts-node -P src/koa/tsconfig.json src/koa/index.ts'",
-    "build": "umi build",
+    "build": "cross-env API_ENV=prod umi build",
     "postinstall": "umi generate tmp",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "test": "umi-test",
@@ -44,6 +44,7 @@
     "@types/koa__router": "^8.0.11",
     "@types/passport-local": "^1.0.34",
     "ahooks": "^3.0.1",
+    "antd": "^4.18.2",
     "koa": "^2.13.4",
     "koa-bodyparser": "^4.3.0",
     "koa-logger": "^3.2.1",
@@ -65,6 +66,7 @@
     "@types/react-dom": "^17.0.0",
     "@umijs/preset-react": "1.x",
     "@umijs/test": "^3.5.20",
+    "cross-env": "^7.0.3",
     "lint-staged": "^10.0.7",
     "prettier": "^2.2.0",
     "typescript": "^4.1.2",
